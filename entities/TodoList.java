@@ -2,8 +2,7 @@ package entities;
 
 public class TodoList {
     private String todo;
-    private int id;
-
+    private Integer id;
 
     public TodoList() {
     }
@@ -12,15 +11,15 @@ public class TodoList {
         return todo;
     }
 
-    public void setTodo(String todo) {
+    public void setTodo(final String todo) {
         this.todo = todo;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 }

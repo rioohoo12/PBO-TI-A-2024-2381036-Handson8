@@ -1,10 +1,10 @@
+
 package repositories;
 
 import entities.TodoList;
 
-public class TodoListRepositoryimpImpl implements  TodoListRepository{
-    public static TodoList[] todos = new TodoList[10];
-
+public class TodoListRepositoryImpl implements TodoListRepository {
+    public static TodoList[] todos = new TodoList[2];
 
     @Override
     public TodoList[] getAll() {
@@ -12,20 +12,20 @@ public class TodoListRepositoryimpImpl implements  TodoListRepository{
     }
 
     @Override
-    public void add(TodoList todoList) {
+    public void add(final TodoList todolist) {
+
         resizeArrayIfFull();
 
         // add todo to array that has null element
         for (int i = 0; i < todos.length; i++) {
             if (todos[i] == null) {
-                todos[i] = todoList;
+                todos[i] = todolist;
                 break;
             }
         }
-
     }
 
-    private static void resizeArrayIfFull() {
+    private void resizeArrayIfFull() {
         // cek whether todos is full
         Boolean isFull = true;
         isFull = isArrayFull(isFull);
@@ -36,7 +36,7 @@ public class TodoListRepositoryimpImpl implements  TodoListRepository{
         }
     }
 
-    private static void resizeArrayToTwoTimesBigger() {
+    private void resizeArrayToTwoTimesBigger() {
         TodoList[] temp = todos;
         todos = new TodoList[todos.length * 2];
         for (int i = 0; i < temp.length; i++) {
@@ -44,7 +44,7 @@ public class TodoListRepositoryimpImpl implements  TodoListRepository{
         }
     }
 
-    private static Boolean isArrayFull(Boolean isFull) {
+    private Boolean isArrayFull(Boolean isFull) {
         for (int i = 0; i < todos.length; i++) {
             if (todos[i] == null) {
                 isFull = false;
@@ -55,7 +55,7 @@ public class TodoListRepositoryimpImpl implements  TodoListRepository{
     }
 
     @Override
-    public boolean remove(Integer number) {
+    public Boolean remove(final Integer number) {
         if (isSelectedTodoNotValid(number)) {
             return false;
         }
@@ -71,7 +71,6 @@ public class TodoListRepositoryimpImpl implements  TodoListRepository{
         }
         return true;
     }
-
     private static boolean isSelectedTodoNotValid(final Integer number) {
         // cek if the number is zero or less than zero
         if (number <= 0) {
@@ -90,8 +89,9 @@ public class TodoListRepositoryimpImpl implements  TodoListRepository{
         return false;
     }
 
+
     @Override
-    public Boolean edit(TodoList todoList) {
+    public Boolean edit(final TodoList todoList) {
         if (isSelectedTodoNotValid(todoList.getId())) {
             return false;
         }
